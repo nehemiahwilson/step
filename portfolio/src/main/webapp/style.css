@@ -1,3 +1,7 @@
+#cleafix {
+    clear: both;
+}
+
 #content {
   margin-left: auto;
   margin-right: auto;
@@ -14,16 +18,29 @@
 }
 
 #creative {
-    width: 50%;
+    width: 40%;
     text-align: left;
     color: white;
-    font-size: 20px;
+    font-size: 25px;
     float: left;
+    padding: 5%;
 }
 
 #creative-image {
-    width: 50%;
-    float: right;
+    width: 45%;
+    float: left;
+}
+
+#professional {
+    width: 40%;
+    text-align: right;
+    color: white;
+    font-size: 25px;
+    padding: 5%;
+}
+
+#professional-image {
+    width: 45%;
 }
 
 div {
