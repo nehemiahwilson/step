@@ -43,6 +43,15 @@
     width: 45%;
 }
 
+#comment-container {
+    width: 40%;
+    text-align: left;
+    color: white;
+    font-size: 25px;
+    float: left;
+    padding: 5%;
+}
+
 div {
   width: 90%;
   padding: 10px;
