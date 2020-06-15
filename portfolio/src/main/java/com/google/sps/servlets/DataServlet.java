@@ -29,10 +29,6 @@ public class DataServlet extends HttpServlet {
     
     public DataServlet() {
         comments = new ArrayList<>();
-        // comments.add("Google STEP intenship is great!");
-        // comments.add("There are a great amount of Tech students interning at Google.");
-        // comments.add("There are three total comments (:");
-
     }
 
     @Override
