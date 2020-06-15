@@ -38,10 +38,36 @@ function randomFact() {
 }
 
 function fetchJson() {
-    fetch('/data').then(response => response.json()).then((stats) => {
+    fetch('/data').then(response => response.json()).then((comments) => {
         const commentContainer = document.getElementById('comment-container');
-        commentContainer.innerText = stats[0] + "\n" + stats[1] + "\n"
-            + stats[2];
-        console.log(stats[0]);
+        comments.forEach((comment) => {
+            console.log(comment);
+            commentContainer.appendChild(createCommentElement(comment));
+        })
     });
+}
+
+function createCommentElement(comment) {
+    const commentElement = document.createElement('li');
+    commentElement.className = 'comment';
+
+    const titleElement = document.createElement('span');
+    titleElement.innerText = comment.comment;
+
+    const deleteButtonElement = document.createElement('button');
+    deleteButtonElement.innerText = 'Delete';
+    deleteButtonElement.addEventListener('click', () => {
+        deleteComment(comment);
+        commentElement.remove();
+    });
+
+    commentElement.appendChild(titleElement);
+    commentElement.appendChild(deleteButtonElement);
+    return commentElement;
+}
+
+function deleteComment(comment) {
+    const params = new URLSearchParams();
+    params.append('id', comment.id);
+    fetch('/delete-task', {method: 'POST', body: params});
 }
