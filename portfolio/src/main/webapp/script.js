@@ -36,3 +36,12 @@ function randomFact() {
     const factContainer = document.getElementById('fact-container');
     factContainer.innerText = fact;
 }
+
+function fetchJson() {
+    fetch('/data').then(response => response.json()).then((stats) => {
+        const commentContainer = document.getElementById('comment-container');
+        commentContainer.innerText = stats[0] + "\n" + stats[1] + "\n"
+            + stats[2];
+        console.log(stats[0]);
+    });
+}
