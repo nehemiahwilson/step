@@ -38,13 +38,45 @@ function randomFact() {
 }
 
 function fetchJson() {
-    fetch('/data').then(response => response.json()).then((comments) => {
+    fetch('/login').then(loginResponse => loginResponse.json()).then((bool) => {
         const commentContainer = document.getElementById('comment-container');
-        comments.forEach((comment) => {
-            console.log(comment);
-            commentContainer.appendChild(createCommentElement(comment));
-        })
+        const logInContainer = document.getElementById('log-in-container');
+
+        if (!bool) {
+            commentContainer.style.display = "none";
+            logInContainer.appendChild(createLogInElement());
+        } else {
+            logInContainer.appendChild(createLogOutElement());
+            fetch('/data').then(response => response.json()).then((comments) => {
+                comments.forEach((comment) => {
+                    console.log(comment);
+                    commentContainer.appendChild(createCommentElement(comment));
+                });
+            });
+        }
+    }); 
+}
+
+function createLogInElement() {
+    const logInButton = document.createElement('button');
+    logInButton.innerText = 'Log In';
+    logInButton.addEventListener('click', () => {
+        // redirect to log in page
+        window.location.href = "/login-page";
     });
+
+    return logInButton;
+}
+
+function createLogOutElement() {
+    const logOutButton = document.createElement('button');
+    logOutButton.innerText = 'Log Out';
+    logOutButton.addEventListener('click', () => {
+        // redirect to log out page
+        window.location.href = "/login-page";
+    });
+
+    return logOutButton;
 }
 
 function createCommentElement(comment) {
