@@ -42,13 +42,19 @@ public class DataServlet extends HttpServlet {
         PreparedQuery results = datastore.prepare(query);
 
         ArrayList<Comment> comments = new ArrayList<>();
+        int commentLimit = 5;
+        int counter = 0;
         for (Entity e : results.asIterable()) {
-            long id = e.getKey().getId();
-            String commentString = (String) e.getProperty("comment");
-            long timestamp = (long) e.getProperty("timestamp");
+            if (counter < commentLimit) {
+                counter++;
 
-            Comment comment = new Comment(id, commentString, timestamp);
-            comments.add(comment);
+                long id = e.getKey().getId();
+                String commentString = (String) e.getProperty("comment");
+                long timestamp = (long) e.getProperty("timestamp");
+
+                Comment comment = new Comment(id, commentString, timestamp);
+                comments.add(comment);
+            }
         }
 
         Gson gson = new Gson();
